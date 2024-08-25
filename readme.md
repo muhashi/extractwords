@@ -1,63 +1,61 @@
-# node-module-boilerplate
+# extractwords
 
-> Boilerplate to kickstart creating a Node.js module
-
-This is what I use for [my own modules](https://www.npmjs.com/~sindresorhus).
-
-Also check out [`node-cli-boilerplate`](https://github.com/sindresorhus/node-cli-boilerplate).
-
-## Getting started
-
-**Click the "Use this template" button.**
-
-Alternatively, create a new directory and then run:
-
-```sh
-curl -fsSL https://github.com/sindresorhus/node-module-boilerplate/archive/main.tar.gz | tar -xz --strip-components=1
-```
-
----
-
-**Remove everything from here and above**
-
----
-
-# unicorn-fun
-
-> My awesome module
+>  Extract the words from a string 
 
 ## Install
 
 ```sh
-npm install unicorn-fun
+npm install extractwords
 ```
 
 ## Usage
 
 ```js
-import unicornFun from 'unicorn-fun';
+import extractWords from 'extractwords';
 
-unicornFun('unicorns');
-//=> 'unicorns & rainbows'
+extractWords('Good morning, how are you?');
+//=> ['Good', 'morning', 'how', 'are', 'you']
+
+extractWords("He didn't pay for his meal m'aam");
+//=> ['He', "didn't", 'pay', 'for', 'his', 'meal', "m'aam"]
+
+extractWords("17651Hello*&!(*2I'm_++`~gOOd 2");
+//=> ['Hello', "I'm", 'gOOd']
+
+extractWords('Good morning, how are you?', {lowercase: true});
+//=> ['good', 'morning', 'how', 'are', 'you']
+
+extractWords('Good Morning. how are you?', {punctuation: true});
+//=> ['Good', 'Morning.', 'how', 'are', 'you?']
+
+extractWords('I . am ... go0d 2', {punctuation: true});
+//=> ['I', '.', 'am', '...', 'go0d', '2']
 ```
 
 ## API
 
-### unicornFun(input, options?)
+### extractWords(input, options?)
 
 #### input
 
 Type: `string`
 
-Lorem ipsum.
+Text containing words to be extracted.
 
 #### options
 
 Type: `object`
 
-##### postfix
+##### lowercase
 
-Type: `string`\
-Default: `'rainbows'`
+Type: `boolean`\
+Default: `false`
 
-Lorem ipsum.
+Whether all words returned are lowercased.
+
+##### punctuation
+
+Type: `boolean`\
+Default: `false`
+
+Whether all punctuation is retained.
