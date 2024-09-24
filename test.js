@@ -46,66 +46,66 @@ test('Handles sentence with contractions and apostrophes', t => {
 });
 
 test('Handles lowercase option', t => {
-    const words = extractWords('Hello, how are you?', {lowercase: true});
+    const words = extractWords('Hello, how are you?', { lowercase: true });
     t.deepEqual(words, ['hello', 'how', 'are', 'you']);
 });
 
 test('Handles mixed case input with lowercase option', t => {
-    const words = extractWords('HeLLo, HOW arE you?', {lowercase: true});
+    const words = extractWords('HeLLo, HOW arE you?', { lowercase: true });
     t.deepEqual(words, ['hello', 'how', 'are', 'you']);
 });
 
 test('Handles mixed case input without lowercase option', t => {
-    const words = extractWords('HeLLo, HOW arE you?', {lowercase: false});
+    const words = extractWords('HeLLo, HOW arE you?', { lowercase: false });
     t.deepEqual(words, ['HeLLo', 'HOW', 'arE', 'you']);
 });
 
 test('Handles punctuation option', t => {
-    const words = extractWords("Tests, now with 'apostrophes'", {punctuation: true});
+    const words = extractWords("Tests, now with 'apostrophes'", { punctuation: true });
     t.deepEqual(words, ['Tests,', 'now', 'with', "'apostrophes'"]);
 });
 
 test('Handles numbers and punctuation', t => {
-    const words = extractWords('Tests,0 3 n0w\n3with numb3r5', {punctuation: true});
+    const words = extractWords('Tests,0 3 n0w\n3with numb3r5', { punctuation: true });
     t.deepEqual(words, ['Tests,0', '3', 'n0w', '3with', 'numb3r5']);
 });
 
 test('Handles punctuation within words', t => {
-    const words = extractWords('In the midd..le of words..', {punctuation: true});
+    const words = extractWords('In the midd..le of words..', { punctuation: true });
     t.deepEqual(words, ['In', 'the', 'midd..le', 'of', 'words..']);
 });
 
 test('Handles multiple punctuation marks', t => {
-    const words = extractWords('Floating    , ! punctu,ation!!', {punctuation: true});
+    const words = extractWords('Floating    , ! punctu,ation!!', { punctuation: true });
     t.deepEqual(words, ['Floating', ',', '!', 'punctu,ation!!']);
 });
 
 test('Handles complex punctuation and contractions', t => {
-    const words = extractWords("Don't do it , it 'isn't' worth it!.. ! ' '' ", {punctuation: true});
+    const words = extractWords("Don't do it , it 'isn't' worth it!.. ! ' '' ", { punctuation: true });
     t.deepEqual(words, ["Don't", 'do', 'it', ',', 'it', "'isn't'", 'worth', 'it!..', '!', "'", "''"]);
 });
 
 test('Handles punctuation disabled', t => {
-    const words = extractWords("Floating    , ! punctu,'atio'n'!!", {punctuation: false});
+    const words = extractWords("Floating    , ! punctu,'atio'n'!!", { punctuation: false });
     t.deepEqual(words, ['Floating', 'punctu', "atio'n"]);
 });
 
 test('Handles lowercase and punctuation options together', t => {
-    const words = extractWords("Floating    , ! punctu,'atio'n'!!", {lowercase: true, punctuation: false});
+    const words = extractWords("Floating    , ! punctu,'atio'n'!!", { lowercase: true, punctuation: false });
     t.deepEqual(words, ['floating', 'punctu', "atio'n"]);
 });
 
 test('Handles lowercase and punctuation options', t => {
-    const words = extractWords("Floating    , ! punctu,'atio'n'!!", {lowercase: true, punctuation: true});
-    t.deepEqual(words, ['floating',  ',', '!', "punctu,'atio'n'!!"]);
+    const words = extractWords("Floating    , ! punctu,'atio'n'!!", { lowercase: true, punctuation: true });
+    t.deepEqual(words, ['floating', ',', '!', "punctu,'atio'n'!!"]);
 });
 
 test('Handles case-sensitive without punctuation', t => {
-    const words = extractWords("Floating    , ! punctu,'atio'n'!!", {lowercase: false, punctuation: false});
+    const words = extractWords("Floating    , ! punctu,'atio'n'!!", { lowercase: false, punctuation: false });
     t.deepEqual(words, ['Floating', 'punctu', "atio'n"]);
 });
 
 test('Handles case-sensitive with punctuation', t => {
-    const words = extractWords("Floating    , ! punctu,'atio'n'!!", {lowercase: false, punctuation: true});
-    t.deepEqual(words, ['Floating',  ',', '!', "punctu,'atio'n'!!"]);
+    const words = extractWords("Floating    , ! punctu,'atio'n'!!", { lowercase: false, punctuation: true });
+    t.deepEqual(words, ['Floating', ',', '!', "punctu,'atio'n'!!"]);
 });
